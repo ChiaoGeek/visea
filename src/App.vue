@@ -27,9 +27,5 @@ html body{
   padding: 0px;
   margin: 0px;
 }
-#app img {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-}
+
 </style>
