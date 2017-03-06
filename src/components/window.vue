@@ -3,7 +3,7 @@
     <div class="window-header">
       <span class="window-title">淘宝网</span>
       <span class="window-close" v-on:click="closewindow">X</span>
-      <span class="window-close" v-on:click="maxwindow">口</span>
+      <span class="window-close" v-on:click="maxwindow"><span class="iconfont visea-icon">&#xe61b;</span></span>
       <span class="window-close" v-on:click="minwindow">--</span>
     </div>
     <div class="window-content">
@@ -109,6 +109,21 @@
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'iconfont';
+  src: url('/visea/static/fonts/icon/iconfont.eot');
+  src: url('/visea/static/fonts/icon/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('/visea/static/fonts/icon/iconfont.woff') format('woff'),
+  url('/visea/static/fonts/icon/iconfont.ttf') format('truetype'),
+  url('/visea/static/fonts/icon/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
   .window-header{
     background-color: brown;
     position: relative;
