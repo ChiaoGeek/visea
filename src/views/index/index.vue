@@ -39,7 +39,9 @@
             </div>
         </div>
     </div>
-    <div id="vi-middle"></div>
+    <div id="vi-middle">
+      <window></window>
+    </div>
 
     <!-- 底部操作 -->
     <div id="vi-footer">
@@ -77,6 +79,7 @@
 </template>
 
 <script>
+  import window from '../../components/window.vue'
 export default {
   name: 'index',
   data () {
@@ -85,7 +88,7 @@ export default {
   computed: {},
   mounted () {},
   methods: {},
-  components: {}
+  components: {'window': window}
 }
 </script>
 
