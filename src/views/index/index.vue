@@ -39,10 +39,9 @@
             </div>
         </div>
     </div>
-    <div id="vi-middle">
-      <window></window>
-    </div>
-
+    <oscontent>
+      <win></win>
+    </oscontent>
     <!-- 底部操作 -->
     <div id="vi-footer">
         <!-- 左侧操作栏目 -->
@@ -79,7 +78,8 @@
 </template>
 
 <script>
-  import window from '../../components/window.vue'
+  import win from '../../components/Window.vue'
+  import oscontent from '../../components/OSContent.vue'
 export default {
   name: 'index',
   data () {
@@ -88,7 +88,7 @@ export default {
   computed: {},
   mounted () {},
   methods: {},
-  components: {'window': window}
+  components: {'win': win, 'oscontent' : oscontent}
 }
 </script>
 

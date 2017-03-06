@@ -6,7 +6,7 @@
       <span class="window-close" v-on:click="maxwindow">口</span>
       <span class="window-close" v-on:click="minwindow">--</span>
     </div>
-    <div class="window-content">
+    <div class="window-content" >
     </div>
   </div>
 </template>
@@ -14,25 +14,23 @@
 
 <script>
   export default {
-    name : 'window',
+    name : 'win',
     data(){
       return {
-        x : 10,
+        x : 0,
         y : 0,
-        drag : false,
         clickX : 0,
         clickY : 0,
         zIndex : 1000,
-        width : 600,
-        height : 400,
+        width : '60%',
+        height : '60%',
         display : 'block'
       }
     },
     mounted(){
       this.moveHandler = this.bindListenFunction(this, this.move)
       this.stopHandler = this.bind(this, this.stop)
-      this.addEventHandler(this.$el, 'mousedown', this.bindListenFunction(this, this.start))
-      console.log(this.$root + "mount over")
+      this.addEventHandler(this.$el.children[0], 'mousedown', this.bindListenFunction(this, this.start))
     },
     destroy(){
 
@@ -80,26 +78,14 @@
       stop(e){
         this.removeEventHandler(document, "mousemove", this.moveHandler);
         this.removeEventHandler(document, "mouseup", this.stopHandler);
-      },
-      mouseDown(e) {
-        this.drag = true;
-        this.clickX = e.clientX;
-        this.clickY = e.clientY;
-      },mouseMove(e){
-        if(this.drag){
-          this.x = this.x + (e.clientX - this.clickX);
-          this.y = this.y + (e.clientY - this.clickY);
-          this.clickX = e.clientX;
-          this.clickY = e.clientY;
-        }
-      },mouseUp(e){
-        this.drag = false;
       },maxwindow(e){
-
+        this.width = '100%';
+        this.height = '100%';
+        this.x = 0;
+        this.y = 0;
       },minwindow(e){
-
+        this.display = 'none'
       },closewindow(e){
-
       }
     },watch : {
 
@@ -112,16 +98,16 @@
   .window-header{
     background-color: brown;
     position: relative;
-    height: 5%;
+    height: 25px;
     width:100%;
     z-index: 2;
   }
   .window{
     width: 900px;
     height: 500px;
-    left: 224px;
-    top: 164px;
     z-index: 2;
+    vertical-align: middle;
+    text-align: center;
     display: block;
     background-color: #ffffff;
     border: 2px solid brown;
@@ -140,6 +126,7 @@
     text-align: center;
     vertical-align: middle;
     z-index: 4;
+    position: relative;
   }
   .window-close:hover{
     background-color: rgba(255,255,255,0.2);
@@ -149,7 +136,7 @@
     position: relative;
     background-color: aqua;
     width: 100%;
-    height: 95%;
+    height: auto;
     z-index: 2;
   }
   .window-title{

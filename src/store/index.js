@@ -8,7 +8,10 @@ import action from './action'
 
 Vue.use(Vuex)
 
-const state = []
+const state = {
+}
+
+
 
 
 export default new Vuex.Store({
