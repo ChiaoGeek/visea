@@ -94,13 +94,21 @@ export default {
 
 <style lang="css" scoped>
 /* font */
-@font-face {
+/*@font-face {
   font-family: 'iconfont';
   src: url('../../assets/font/icon/iconfont.eot');
   src: url('../../assets/font/icon/iconfont.eot?#iefix') format('embedded-opentype'),
   url('../../assets/font/icon/iconfont.woff') format('woff'),
   url('../../assets/font/icon/iconfont.ttf') format('truetype'),
   url('../../assets/font/icon/iconfont.svg#iconfont') format('svg');
+}*/
+@font-face {
+  font-family: 'iconfont';
+  src: url('../../../static/fonts/icon/iconfont.eot');
+  src: url('../../../static/fonts/icon/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('../../../static/fonts/icon/iconfont.woff') format('woff'),
+  url('../../../static/fonts/icon/iconfont.ttf') format('truetype'),
+  url('../../../static/fonts/icon/iconfont.svg#iconfont') format('svg');
 }
 .iconfont{
   font-family:"iconfont" !important;

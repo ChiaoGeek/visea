@@ -2,9 +2,9 @@
   <div class="window" :style="{width : width, height : height ,zIndex : zIndex, marginLeft : x + 'px', marginTop : y + 'px', display : display}">
     <div class="window-header">
       <span class="window-title">淘宝网</span>
-      <span class="window-close" v-on:click="closewindow">X</span>
-      <span class="window-close" v-on:click="maxwindow">口</span>
-      <span class="window-close" v-on:click="minwindow">--</span>
+      <span class="window-close" v-on:click="closewindow"><span class="iconfont visea-icon">&#xe628;</span></span>
+      <span class="window-close" v-on:click="maxwindow"><span class="iconfont visea-icon">&#xe625;</span></span>
+      <span class="window-close" v-on:click="minwindow"><span class="iconfont visea-icon">&#xe626;</span></span>
     </div>
     <div class="window-content" >
     </div>
@@ -95,6 +95,21 @@
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'iconfont';
+  src: url('../../static/fonts/icon/iconfont.eot');
+  src: url('../../static/fonts/icon/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('../../static/fonts/icon/iconfont.woff') format('woff'),
+  url('../../static/fonts/icon/iconfont.ttf') format('truetype'),
+  url('../../static/fonts/icon/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
   .window-header{
     background-color: brown;
     position: relative;
