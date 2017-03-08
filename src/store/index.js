@@ -71,7 +71,10 @@ var resultSaveApp = {
 }
 
 //以上为测试数据,和数据格式
+
+
 const state = {
+  browseHeight : window.innerHeight ? window.innerHeight : document.body.clientHeight,
   headerHeight : 63,  //主页面header高度,全局应一致
   footerHeight : 35,  //主页面footer高度,全局应一致
   zIndex : 1000,  //窗口的zIndex
@@ -80,7 +83,18 @@ const state = {
   appList : {'d19j2h023h0ho23' : searchEngineApp, '8123dh982h912h' : splitEngineApp, '0j3d01du1d91h' : analysisEngineApp, '19hd1981hp912h' : resultSaveApp,}
 }
 
-
+//监听窗口大小变化事件
+window.onresize = function(){
+  var winHeight=0;
+  if (window.innerHeight)
+    winHeight = window.innerHeight;
+  else if ((document.body) && (document.body.clientHeight))
+    winHeight = document.body.clientHeight;
+  //通过深入Document内部对body进行检测，获取浏览器窗口高度
+  if (document.documentElement && document.documentElement.clientHeight)
+    winHeight = document.documentElement.clientHeight;
+  state.browseHeight = winHeight;
+}
 
 
 export default new Vuex.Store({

@@ -7,4 +7,7 @@ export const TASK_ADD = 'taskAdd';
 export const TASK_REMOVE = 'taskRemove'
 
 export const TASK_ACTIVE = 'taskActive'
+export const TASK_CLOSE = 'taskClose'
+
+export const TASK_BACKGROUND = 'taskBackground'
 

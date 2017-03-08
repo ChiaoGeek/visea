@@ -22,6 +22,11 @@ export default {
   },
   taskActive({commit}, taskId){
     commit(types.TASK_ACTIVE, taskId);
+  },
+  taskClose({commit }, {taskId, windowId}){
+    commit(types.TASK_CLOSE , {taskId, windowId})
+  },taskBackground({commit }, taskId){
+    commit(types.TASK_BACKGROUND, taskId)
   }
 
 }

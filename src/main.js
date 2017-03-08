@@ -16,3 +16,4 @@ var vm = new Vue({
   template: '<App/>',
   components: { App }
 })
+

@@ -47,10 +47,10 @@ export default {
       var taskId = 'task-' + appId ;
       var array = new Uint32Array(1);
       window.crypto.getRandomValues(array);
-      var widnowId = appId + array[0];
+      var windowId = appId + array[0];
       const appInfo = {
         taskId : taskId,
-        windowId : widnowId,
+        windowId : windowId,
         appId : appId
       }
       this.$store.dispatch('taskAdd', appInfo);
@@ -189,114 +189,7 @@ export default {
 .vhahn-icon {
 
 }
-/*footer*/
-#vi-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0px;
-  height: 35px;
-  padding: 0 0px;
-  width: 100%;
-  z-index: 1;
-  overflow: hidden;
-  text-align: left;
-  -webkit-transition: all .25s;
-  -webkit-transition-delay: 0;
-  transition: all .25s;
-  transition-delay: 0;
-  -ms-transition: all .25s;
-  -ms-transition-delay: 0;
-  background-color: rgba(31,91,183,0.8);
-}
-#v-f-left {
-  width: 120px;
-  height: 100%;
-}
-#vf-l-begin {
-  width: 36px;
-  height: 100%;
-  text-align: center;
-  display: inline-block;
-  float: left;
-  cursor: pointer;
-  line-height: 35px;
-}
-#vf-l-user {
-  width: 36px;
-  height: 100%;
-  text-align: center;
-  display: inline-block;
-  float: left;
-  cursor: pointer;
-  line-height: 35px;
-}
-#vf-l-manage {
-  width: 36px;
-  height: 100%;
-  text-align: center;
-  display: inline-block;
-  float: left;
-  cursor: pointer;
-  line-height: 35px;
-}
-#vf-right {
-  height: 100%;
-  position: absolute;;
-  top: 0px;
-  right: 10px;
-}
-.visea-icon {
-  color: #fff;
-  height: 100%;
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: 500;
-}
 
-#vf-task {
-  position: absolute;
-  left: 120px;
-  top: 0px;
-  right: 278px;
-  height: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.vf-task{
-  position: relative;
-  width: 160px;
-  margin: 0 2px;
-  height: 30px;
-  display: inline-block;
-  margin-bottom: 2px;
-  color: #fff;
-  border-bottom: 2.5px solid rgba(255,255,255,0.6);
-  overflow: hidden;
-  cursor: pointer;
-}
-.vf-task:hover{
-  background-color: rgba(31,91,183,0.8);
-}
-
-.vf-task-icon{
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 8px;
-  left: 8px;
-  vertical-align: middle;
-  border: 0px;
-}
-.vf-task-name{
-  height: 100%;
-  width: 100%;
-  padding-left: 35px;
-  line-height: 37px;
-  font-size: 12px;
-  text-align: left;
-  font-family: "微软雅黑",'Luxi Sans','DejaVu Sans',Tahoma,'Hiragino Sans GB',STHeiti;
-  font-weight: 900;
-}
 /*task*/
 .vf-r-icon {
   width: 36px;

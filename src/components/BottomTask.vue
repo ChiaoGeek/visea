@@ -20,7 +20,7 @@
       <div class="vf-r-icon"><span class="iconfont visea-icon">&#xe622;</span></div>
       <div class="vf-r-icon"><span class="iconfont visea-icon">&#xe621;</span></div>
       <div class="vf-r-icon"><span class="iconfont visea-icon">&#xe61e;</span></div>
-      <div style="width:5px;border-left:1px solid #ccc">ddd</div>
+      <div style="width:5px;border-left:1px solid #ccc"></div>
     </div>
 
   </div>
@@ -35,7 +35,6 @@
     },
     methods : {
       taskClick(id){
-        console.log(id)
         this.$store.dispatch('taskActive', id)
       }
     },computed : {

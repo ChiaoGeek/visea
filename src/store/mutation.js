@@ -24,8 +24,18 @@ export default {
         taskId: taskId,
         appId: appId,
         active : false,
-        zIndex : state.zIndex + 2
-      }
+        zIndex : state.zIndex + 2,
+        display : 'block'
+      }   //es6已经将这种声明的方式改为set的声明,不是map的声明
+      // var windowMap = new Map([
+      //   ['windowId', windowId],
+      //   ['windowTitle', appInfo.appName],
+      //   ['windowIcon', appInfo.appIcon,],
+      //   ['taskId', taskId],
+      //   ['active', true],
+      //   ['zIndex', state.zIndex + 2]
+      // ])
+
       var taskNewSet = new Array();
       $.each(state.taskList , function(n , value){
           taskNewSet[n] = value;
@@ -65,7 +75,7 @@ export default {
         if(value.taskId != taskId){
           value.active = true;
         }else{
-
+          value.display = 'block'
           value.active = false;
           value.zIndex = state.zIndex + 2;
           state.zIndex += 2;
@@ -74,6 +84,65 @@ export default {
       })
       state.windowList = newWinList;
     }
-  }
+  },
+  [types.TASK_CLOSE](state, {taskId = '' , windowId = ''}){
+    if(taskId == '' && windowId == '')
+      return ;
+    var newTaskList = new Array();
+    var newWindowList = new Array();
+    if(taskId != ''){
+      var i = 0;
+      $.each(state.taskList, function(n , value){
+        if(value.taskId != taskId){
+          newTaskList[i++] = value;
+        }else{
+          windowId = value.windowId;
+        }
+      })
+      i = 0;
+      $.each(state.windowList, function(n , value){
+        if(value.windowId != windowId){
+          newWindowList[i++] = value;
+        }
+      })
+      state.windowList = newWindowList;
+      state.taskList = newTaskList;
+      return;
+    }else{
+      $.each(state.windowList, function(n , value){
+        if(value.windowId != windowId){
+          newWindowList[n] = value;
+        }else{
+          taskId = value.taskId;
+        }
+      })
+      $.each(state.taskList, function(n , value){
+        if(value.taskId != taskId){
+          newTaskList[n] = value;
+        }
+      })
+      state.windowList = newWindowList;
+      state.taskList = newTaskList;
+      return;
+    }
+  },
+    [types.TASK_BACKGROUND](state , taskId){
+      if(taskId != '') {
+        var newWindowList = new Array();
+        var i = 0;
+        $.each(state.windowList, function (n, value) {
+          newWindowList[i++] = value;
+          if (value.taskId == taskId) {
+            newWindowList[i-1].display = 'none';
+          }
+        })
+      }
+      state.windowList = newWindowList;
+    }
+
+
+
+
+
 }
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="main-content" :style="{height : height+ 'px' , width : '100%'}">
-    <win v-for="data in windowList" :key="data.id" v-bind="{'taskId' : data.taskId, 'title' : data.windowTitle , 'zIndex' :data.zIndex ,'isActive' : data.active}">
+  <div class="main-content" :style="{height : browseHeight+ 'px' , width : '100%'}">
+    <win v-for="data in windowList" :value="data.display" :key="data.id" v-bind="{'display' : data.display , 'taskId' : data.taskId, 'title' : data.windowTitle , 'zIndex' :data.zIndex ,'isActive' : data.active}">
     </win>
   </div>
 </template>
@@ -14,23 +14,27 @@
       return {
       }
     },props :{
-
+      windowHeight : window.innerHeight
     },watch : {
-
+      windowHeight(){
+        console.log('dasda')
+      }
     },
     computed :{
       height(){
-        let footerHeight = 43;
-        let headerHeight = 35;
         let clientHeight;
         if(window.innerHeight)
           clientHeight = window.innerHeight
         else
           clientHeight = document.body.clientHeight;
+        console.log(window.innerHeight)
         return clientHeight - this.$store.state.headerHeight - this.$store.state.footerHeight;
       },
       windowList() {
         return this.$store.state.windowList
+      },
+      browseHeight() {
+        return this.$store.state.browseHeight - this.$store.state.headerHeight - this.$store.state.footerHeight;
       }
     },
     components: {'win': win}

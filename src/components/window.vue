@@ -2,9 +2,9 @@
   <div class="window" @click="clickActive" :class="{'inactive' : isActive}" :style="{width : width +'px', height : height +'px' ,zIndex : zIndex, left : x + 'px', top : y + 'px', display : display}">
     <div class="window-header " :class="{'inactive' : isActive}">
       <span class="window-title" :class="{'inactive' : isActive}">{{title}}</span>
-      <span class="window-operate" :class="{'inactive' : isActive}" v-on:click="closewindow"><span class="iconfont visea-icon">&#xe628;</span></span>
-      <span class="window-operate" :class="{'inactive' : isActive}" v-on:click="maxwindow"><span class="iconfont visea-icon">&#xe625;</span></span>
-      <span class="window-operate" :class="{'inactive' : isActive}" v-on:click="minwindow"><span class="iconfont visea-icon">&#xe626;</span></span>
+      <span class="window-operate" :class="{'inactive' : isActive}" :style="{zIndex : zIndex + 2}" v-on:click="closewindow"><span class="iconfont visea-icon">&#xe628;</span></span>
+      <span class="window-operate" :class="{'inactive' : isActive}" :style="{zIndex : zIndex + 2}" v-on:click="maxwindow"><span class="iconfont visea-icon">&#xe625;</span></span>
+      <span class="window-operate" :class="{'inactive' : isActive}" :style="{zIndex : zIndex + 2}" v-on:click="minwindow"><span class="iconfont visea-icon">&#xe626;</span></span>
     </div>
     <div class="window-content" >
     </div>
@@ -30,10 +30,7 @@
         type : Number
       },
       title : '',
-      display : {
-        default :'block',
-        type: String
-      },
+      display : '',
       isActive : {
         type : Boolean,
         default : true
@@ -103,13 +100,13 @@
         this.x = 0;
         this.y = 0 - this.$store.state.headerHeight;
       },minwindow(e){
-        this.display = 'none'
+        e.stopPropagation()
+        this.$store.dispatch('taskBackground', this.$props.taskId)
       },closewindow(e){
-
+        this.$store.dispatch('taskClose', {taskId : this.$props.taskId, windowId : ''})
       },clickActive(e){
         this.$store.dispatch('taskActive', this.$props.taskId)
       }
-
     },watch : {
 
     }
@@ -172,7 +169,7 @@
     text-align: center;
     vertical-align: middle;
     z-index: 4;
-    position: relative;
+    display : block;
   }
   .window-operate:hover{
     background-color: rgba(255,255,255,0.2);
