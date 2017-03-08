@@ -17,12 +17,12 @@
     name : 'win',
     data(){
       return {
-        x : 200,
-        y : 100,
+        x : this.$store.state.browseWidth * 0.1,
+        y :  this.$store.state.browseHeight * 0.1,
         clickX : 0,
         clickY : 0,
-        width : 600,
-        height : 500,
+        width : this.$store.state.browseWidth * 0.5,
+        height : this.$store.state.browseHeight * 0.7,
       }
     },props : {
       zIndex : {
@@ -45,6 +45,7 @@
       this.addEventHandler(this.$el.children[0], 'mousedown', this.bindListenFunction(this, this.start))
     },
     comouted : {
+
     },
     methods : {
       bind(object, fun) {
@@ -86,6 +87,10 @@
         this.y = this.y + (e.clientY - this.clickY);
         if(this.y < 0-this.$store.state.headerHeight) {
           this.y = 0 - this.$store.state.headerHeight
+        }
+        if(this.y > this.$store.state.browseHeight - this.$store.state.headerHeight - this.height){
+          this.y = this.$store.state.browseHeight - this.$store.state.headerHeight - this.height
+          console.log("dadasdsadsd")
         }
         if(e.clientY > 0)
           this.clickY = e.clientY;
@@ -155,6 +160,7 @@
     border: 2px solid brown;
     position : absolute;
     border-radius: 5px;
+    overflow: hidden;
   }
   .window-operate{
     float: right;

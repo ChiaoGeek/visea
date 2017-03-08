@@ -75,6 +75,7 @@ var resultSaveApp = {
 
 const state = {
   browseHeight : window.innerHeight ? window.innerHeight : document.body.clientHeight,
+  browseWidth : window.innderWidth ? window.innderWidth : document.body.clientWidth,
   headerHeight : 63,  //主页面header高度,全局应一致
   footerHeight : 35,  //主页面footer高度,全局应一致
   zIndex : 1000,  //窗口的zIndex
