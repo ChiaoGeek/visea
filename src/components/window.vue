@@ -1,10 +1,10 @@
 <template>
-  <div class="window" :style="{width : width, height : height ,zIndex : zIndex, marginLeft : x + 'px', marginTop : y + 'px', display : display}">
-    <div class="window-header">
-      <span class="window-title">淘宝网</span>
-      <span class="window-close" v-on:click="closewindow"><span class="iconfont visea-icon">&#xe628;</span></span>
-      <span class="window-close" v-on:click="maxwindow"><span class="iconfont visea-icon">&#xe625;</span></span>
-      <span class="window-close" v-on:click="minwindow"><span class="iconfont visea-icon">&#xe626;</span></span>
+  <div class="window" @click="clickActive" :class="{'inactive' : isActive}" :style="{width : width +'px', height : height +'px' ,zIndex : zIndex, left : x + 'px', top : y + 'px', display : display}">
+    <div class="window-header " :class="{'inactive' : isActive}">
+      <span class="window-title" :class="{'inactive' : isActive}">{{title}}</span>
+      <span class="window-operate" :class="{'inactive' : isActive}" v-on:click="closewindow"><span class="iconfont visea-icon">&#xe628;</span></span>
+      <span class="window-operate" :class="{'inactive' : isActive}" v-on:click="maxwindow"><span class="iconfont visea-icon">&#xe625;</span></span>
+      <span class="window-operate" :class="{'inactive' : isActive}" v-on:click="minwindow"><span class="iconfont visea-icon">&#xe626;</span></span>
     </div>
     <div class="window-content" >
     </div>
@@ -17,14 +17,29 @@
     name : 'win',
     data(){
       return {
-        x : 0,
-        y : 0,
+        x : 200,
+        y : 100,
         clickX : 0,
         clickY : 0,
-        zIndex : 1000,
-        width : '60%',
-        height : '60%',
-        display : 'block'
+        width : 600,
+        height : 500,
+      }
+    },props : {
+      zIndex : {
+        default : 1000,
+        type : Number
+      },
+      title : '',
+      display : {
+        default :'block',
+        type: String
+      },
+      isActive : {
+        type : Boolean,
+        default : true
+      },taskId : {
+        type : String,
+        default : ''
       }
     },
     mounted(){
@@ -32,8 +47,7 @@
       this.stopHandler = this.bind(this, this.stop)
       this.addEventHandler(this.$el.children[0], 'mousedown', this.bindListenFunction(this, this.start))
     },
-    destroy(){
-
+    comouted : {
     },
     methods : {
       bind(object, fun) {
@@ -70,23 +84,32 @@
         e.preventDefault()
       },
       move(e){
+        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
         this.x = this.x + (e.clientX - this.clickX);
         this.y = this.y + (e.clientY - this.clickY);
+        if(this.y < 0-this.$store.state.headerHeight) {
+          this.y = 0 - this.$store.state.headerHeight
+        }
+        if(e.clientY > 0)
+          this.clickY = e.clientY;
         this.clickX = e.clientX;
-        this.clickY = e.clientY;
       },
       stop(e){
         this.removeEventHandler(document, "mousemove", this.moveHandler);
         this.removeEventHandler(document, "mouseup", this.stopHandler);
       },maxwindow(e){
-        this.width = '100%';
-        this.height = '100%';
+        this.width = window.innerWidth;
+        this.height = window.innerHeight - this.$store.state.footerHeight;
         this.x = 0;
-        this.y = 0;
+        this.y = 0 - this.$store.state.headerHeight;
       },minwindow(e){
         this.display = 'none'
       },closewindow(e){
+
+      },clickActive(e){
+        this.$store.dispatch('taskActive', this.$props.taskId)
       }
+
     },watch : {
 
     }
@@ -110,12 +133,19 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
+.visea-icon{
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+  margin-top : 3px;
+  display: block;
+}
   .window-header{
     background-color: brown;
-    position: relative;
+    position: absolute;
     height: 25px;
     width:100%;
-    z-index: 2;
+    z-index: 6;
   }
   .window{
     width: 900px;
@@ -127,8 +157,9 @@
     background-color: #ffffff;
     border: 2px solid brown;
     position : absolute;
+    border-radius: 5px;
   }
-  .window-close{
+  .window-operate{
     float: right;
     font-size: small;
     font-family: 'Cambria_','PT Serif Caption',Verdana,Arial,Helvetica,sans-serif;
@@ -143,7 +174,7 @@
     z-index: 4;
     position: relative;
   }
-  .window-close:hover{
+  .window-operate:hover{
     background-color: rgba(255,255,255,0.2);
   }
 
@@ -151,8 +182,9 @@
     position: relative;
     background-color: aqua;
     width: 100%;
-    height: auto;
-    z-index: 2;
+    height: 100%;
+    padding-top: 25px;
+    overflow: hidden;
   }
   .window-title{
     float: left;
@@ -166,10 +198,25 @@
     z-index: 4;
     vertical-align: middle;
     margin-top: 0.5%;
-    z-index: 2;
   }
-iframe{
-  width: 100%;
-  height: 100%;
-}
+  iframe{
+    width: 100%;
+    height: 100%;
+  }
+  *{
+    box-sizing: border-box
+  }
+  .inactive {
+    border-color: #ebebeb;
+    background-color: #ebebeb;
+    color: #000000;
+  }
+  .window-operate.inactive:hover{
+    background-color: rgba(133, 104, 65, 0.54);
+  }
+
+  .active{
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3), 0 3px 8px rgba(0,0,0,0.2);
+    }
+
 </style>

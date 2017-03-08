@@ -7,68 +7,19 @@
                 <a href="#">ViSea深入分析系统</a>
             </div>
             <div id="vh-application">
-                <a href="#" class="vha-href">
+                <a href="#" class="vha-href"  v-for="data in apps" id="data.appId" @click="openApp(data.appId)">
                     <span class="vha-h-name">
                       <i class="vhahn-icon">&#xe623;</i>
-                      搜索引擎
+                      {{data.appName}}
                     </span>
                 </a>
-
-                <a href="#" class="vha-href">
-                    <span class="vha-h-name">
-                      <i class="vhahn-icon">&#xe60c;</i>
-                      拆分过滤
-                    </span>
-                </a>
-
-                <a href="#" class="vha-href">
-                    <span class="vha-h-name">
-                      <i class="vhahn-icon">&#xe624;</i>
-                      分析面板
-                    </span>
-                </a>
-
-                <a href="#" class="vha-href">
-                    <span class="vha-h-name">
-                      <i class="vhahn-icon">&#xe662;</i>
-                      结果保存
-                    </span>
-                </a>
-
-
             </div>
         </div>
     </div>
     <oscontent>
-      <win></win>
     </oscontent>
     <!-- 底部操作 -->
-    <div id="vi-footer">
-        <!-- 左侧操作栏目 -->
-        <div id="v-f-left">
-            <div id="vf-l-begin"><span class="iconfont visea-icon">&#xe61b;</span></div>
-            <div id="vf-l-user"><span class="iconfont visea-icon">&#xe619;</span></div>
-            <div id="vf-l-manage"><span class="iconfont visea-icon">&#xe652;</span></div>
-        </div>
-
-        <!-- 中间任务栏 -->
-        <div id="vf-task">
-            <div class="vf-task">
-                <img class="vf-task-icon" src="../../assets/index/search.png">
-                <div class="vf-task-name">搜索引擎</div>
-            </div>
-        </div>
-
-        <!-- 右侧任务栏 -->
-        <div id="vf-right">
-          <div class="vf-r-icon"><span class="iconfont visea-icon">&#xe622;</span></div>
-          <div class="vf-r-icon"><span class="iconfont visea-icon">&#xe621;</span></div>
-          <div class="vf-r-icon"><span class="iconfont visea-icon">&#xe61e;</span></div>
-          <div style="width:5px;border-left:1px solid #ccc">ddd</div>
-        </div>
-
-    </div>
-
+    <bottom-task></bottom-task>
     <!-- 背景墙 -->
     <div id="vi-wallpaper">
         <img id="v-w-bg" src="../../assets/index/bg.jpg" >
@@ -80,15 +31,32 @@
 <script>
   import win from '../../components/Window.vue'
   import oscontent from '../../components/OSContent.vue'
+  import bottomTask from '../../components/BottomTask.vue'
 export default {
   name: 'index',
   data () {
-    return {}
+    return {
+      apps : this.$store.state.appList
+    }
   },
   computed: {},
   mounted () {},
-  methods: {},
-  components: {'win': win, 'oscontent' : oscontent}
+  methods: {
+    openApp(appId){
+      var appinfo = this.$store.state.appList[appId]
+      var taskId = 'task-' + appId ;
+      var array = new Uint32Array(1);
+      window.crypto.getRandomValues(array);
+      var widnowId = appId + array[0];
+      const appInfo = {
+        taskId : taskId,
+        windowId : widnowId,
+        appId : appId
+      }
+      this.$store.dispatch('taskAdd', appInfo);
+    }
+  },
+  components: {'win': win, 'oscontent' : oscontent, 'bottomTask': bottomTask}
 }
 </script>
 
