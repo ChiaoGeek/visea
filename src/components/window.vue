@@ -1,18 +1,21 @@
 <template>
-  <div class="window" @click="clickActive" :class="{'inactive' : isActive}" :style="{width : width +'px', height : height +'px' ,zIndex : zIndex, left : x + 'px', top : y + 'px', display : display}">
+  <div class="window" ondragover="return false" @click="clickActive" @drop="dragover" :class="{'inactive' : isActive}" :style="{width : width +'px', height : height +'px' ,zIndex : zIndex, left : x + 'px', top : y + 'px', display : display}">
     <div class="window-header " :class="{'inactive' : isActive}">
       <span class="window-title" :class="{'inactive' : isActive}">{{title}}</span>
       <span class="window-operate" :class="{'inactive' : isActive}" :style="{zIndex : zIndex + 2}" v-on:click="closewindow"><span class="iconfont visea-icon">&#xe628;</span></span>
       <span class="window-operate" :class="{'inactive' : isActive}" :style="{zIndex : zIndex + 2}" v-on:click="maxwindow"><span class="iconfont visea-icon">&#xe625;</span></span>
       <span class="window-operate" :class="{'inactive' : isActive}" :style="{zIndex : zIndex + 2}" v-on:click="minwindow"><span class="iconfont visea-icon">&#xe626;</span></span>
     </div>
-    <div class="window-content" >
+    <div class="window-content">
+      <slot name="content"></slot>
     </div>
   </div>
 </template>
 
 
 <script>
+  import svgTable from './SvgPanel'
+  import appsearch from './AppSearch'
   export default {
     name : 'win',
     data(){
@@ -22,7 +25,7 @@
         clickX : 0,
         clickY : 0,
         width : this.$store.state.browseWidth * 0.5,
-        height : this.$store.state.browseHeight * 0.7,
+        height : this.$store.state.browseHeight * 0.7
       }
     },props : {
       zIndex : {
@@ -111,9 +114,16 @@
         this.$store.dispatch('taskClose', {taskId : this.$props.taskId, windowId : ''})
       },clickActive(e){
         this.$store.dispatch('taskActive', this.$props.taskId)
+      },
+      dragover(e){
+        var r = Math.floor(Math.random() * this.$children[0].nodes.length);
+        this.$children[0].update(r)
       }
     },watch : {
 
+    },components :{
+      'svgTable' : svgTable,
+      'appsearch' : appsearch
     }
 
   }

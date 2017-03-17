@@ -55,22 +55,22 @@ var searchEngineApp = {
   appIcon : '&#xe623;',
 }
 var splitEngineApp = {
-  appId : '8123dh982h912h',
+  appId : 's3dh982h912h',
   appName : '拆分过滤',
   appIcon : '&#xe60c;',
 }
 var analysisEngineApp = {
-  appId : '0j3d01du1d91h',
+  appId : 'j3d01du1d91h',
   appName : '分析面板',
   appIcon : '&#xe624;',
 }
 var resultSaveApp = {
-  appId : '19hd1981hp912h',
+  appId : 'hd1981hp912h',
   appName : '结果保存',
   appIcon : '&#xe662;',
 }
 
-//以上为测试数据,和数据格式
+//以上为测试数据,和数据格式,下面没有用到
 
 
 const state = {
@@ -81,7 +81,7 @@ const state = {
   zIndex : 1000,  //窗口的zIndex
   taskList : [],  //任务列表
   windowList : [],  //窗口列表
-  appList : {'d19j2h023h0ho23' : searchEngineApp, '8123dh982h912h' : splitEngineApp, '0j3d01du1d91h' : analysisEngineApp, '19hd1981hp912h' : resultSaveApp,}
+  appList : {'d19j2h023h0ho23' : searchEngineApp, 's3dh982h912h' : splitEngineApp, 'j3d01du1d91h' : analysisEngineApp, 'hd1981hp912h' : resultSaveApp,}
 }
 
 //监听窗口大小变化事件

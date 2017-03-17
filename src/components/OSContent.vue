@@ -1,6 +1,10 @@
 <template>
   <div class="main-content" :style="{height : browseHeight+ 'px' , width : '100%'}">
     <win v-for="data in windowList" :value="data.display" :key="data.id" v-bind="{'display' : data.display , 'taskId' : data.taskId, 'title' : data.windowTitle , 'zIndex' :data.zIndex ,'isActive' : data.active}">
+      <template scope="props" slot="content">
+        <svgPanel :id="data.appId" :copId="data.appId" v-if="data.appId=='s3dh982h912h'" ></svgPanel>
+        <appsearch :id="data.appId" :copId="data.appId" v-else-if="data.appId=='d19j2h023h0ho23'"></appsearch>
+      </template>
     </win>
   </div>
 </template>
@@ -8,16 +12,17 @@
 
 <script>
   import win from './Window'
+  import svgPanel from './SvgPanel'
+  import appsearch from './AppSearch.vue'
   export default {
     name : 'oscontent',
     data(){
       return {
       }
     },props :{
-      windowHeight : window.innerHeight
+
     },watch : {
       windowHeight(){
-        console.log('dasda')
       }
     },
     computed :{
@@ -27,7 +32,6 @@
           clientHeight = window.innerHeight
         else
           clientHeight = document.body.clientHeight;
-        console.log(window.innerHeight)
         return clientHeight - this.$store.state.headerHeight - this.$store.state.footerHeight;
       },
       windowList() {
@@ -37,7 +41,7 @@
         return this.$store.state.browseHeight - this.$store.state.headerHeight - this.$store.state.footerHeight;
       }
     },
-    components: {'win': win}
+    components: {'win': win, 'svgPanel' : svgPanel, 'appsearch' : appsearch}
   }
 </script>
 

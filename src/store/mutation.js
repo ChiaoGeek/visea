@@ -35,7 +35,6 @@ export default {
       //   ['active', true],
       //   ['zIndex', state.zIndex + 2]
       // ])
-
       var taskNewSet = new Array();
       $.each(state.taskList , function(n , value){
           taskNewSet[n] = value;
@@ -139,6 +138,9 @@ export default {
       }
       state.windowList = newWindowList;
     }
+
+
+
 
 
 
