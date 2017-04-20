@@ -93,7 +93,6 @@
         }
         if(this.y > this.$store.state.browseHeight - this.$store.state.headerHeight - this.height){
           this.y = this.$store.state.browseHeight - this.$store.state.headerHeight - this.height
-          console.log("dadasdsadsd")
         }
         if(e.clientY > 0)
           this.clickY = e.clientY;

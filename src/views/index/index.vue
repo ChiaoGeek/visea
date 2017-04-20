@@ -140,8 +140,9 @@ export default {
 #vh-application {
   height: 50px;
   float: left;
-  margin-left: 250px;
+  display: inline;
   padding-top: 10px;
+  position: relative;
 }
 .vha-href {
   display: block;

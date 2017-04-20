@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <iframe src="http://www.baidu.com" draggable="true">
+    <iframe src="http://localhost/channel" draggable="true">
 
     </iframe>
   </div>
@@ -11,9 +11,10 @@
   export default {
     name : "appsearch",
     mounted() {
-      this.child[0].load(function () {
-        console.log("ovver")
-      })
+      console.log(this.$el.children[0].contentWindow.document.domain)
+      this.$el.children[0].onload = function (a) {
+
+      }
     },
     methods : {}
   }
